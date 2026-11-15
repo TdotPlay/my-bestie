@@ -157,10 +157,11 @@ function blowCandles() {
   document.getElementById("lockBanner").style.display = "none";
   document.getElementById("letterContent").style.display = "block";
 
-  document.getElementById("songContainer").innerHTML =
-    '<iframe width="100%" height="80" style="border-radius:10px;" ' +
-    'src="https://youtube.com" ' +
-    'title="Barbaad Song" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>';
+    document.getElementById("songContainer").innerHTML =
+    '<audio controls autoplay loop style="width:100%; margin-top:6px;">' +
+    '<source src="barbaad.mp3" type="audio/mpeg">' +
+    '</audio>';
+
 
   launchConfetti();
 }
