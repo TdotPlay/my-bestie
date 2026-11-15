@@ -52,7 +52,7 @@
     <h1>Happy Birthday, Bestie! 🥂</h1>
     <p class="sub">Today is all about celebrating the prettiest, funniest, most iconic soul sister ever.</p>
   </div>
-  <!-- INTERACTIVE CAKE -->
+   <!-- INTERACTIVE CAKE -->
   <div class="card">
     <h2>🎂 Make a Wish & Blow the Candles!</h2>
     <p class="sub" id="cakeHint">Tap "Use Mic to Blow" and blow into your phone, OR tap the button below!</p>
@@ -74,15 +74,25 @@
     </div>
   </div>
 
-  <!-- SECRET BIRTHDAY LETTER -->
+  <!-- SECRET BIRTHDAY LETTER + BARBAAD SONG -->
   <div class="card">
     <h2>💌 Secret Bestie Letter</h2>
-    <div class="locked-msg" id="lockBanner">🔒 Blow out the candles on your cake above to unlock your birthday letter!</div>
+    <div class="locked-msg" id="lockBanner">🔒 Blow out the candles on your cake above to unlock your letter & song!</div>
+
     <div class="letter-box" id="letterContent">
-      <strong>To my favorite human & forever bestie,</strong><br><br>
-      Happy Birthday!! I honestly don't know what I would do without you in my life. Thank you for every late-night talk, every unhinged laugh, every time you hyped me up, and for always having my back no matter what.<br><br>
-      You deserve every ounce of happiness, love, and good energy this year. No matter where life takes us, you're stuck with me forever. Let's make this your best year yet! 🥂💖<br><br>
-      <strong>Love always, your best friend 💕</strong>
+      <!-- YOUR CUSTOM LETTER -->
+      <div id="customLetterText">
+        <strong>To my favorite human & forever bestie,</strong><br><br>
+        Happy Birthday!! I honestly don't know what I would do without you in my life. Thanku for always being there for me and always comforting me and helping me supporting me in everything. I love you so much!<br><br>
+        You deserve every ounce of happiness, love, and good energy this year. No matter where life takes us, you're stuck with me forever. Let's make this your best year yet! 🥂💖<br><br>
+        <strong>Love always, your best friend 💕</strong>
+      </div>
+
+      <!-- BARBAAD SONG PLAYER (AUTO-PLAYS WHEN CANDLES BLOW OUT) -->
+      <div class="song-bar">
+        <div class="song-title">🎶 Now Playing: Barbaad — Jubin Nautiyal</div>
+        <div id="songContainer"></div>
+      </div>
     </div>
   </div>
 
@@ -143,10 +153,15 @@ function blowCandles() {
   document.getElementById("f1").classList.add("out");
   document.getElementById("f2").classList.add("out");
   document.getElementById("f3").classList.add("out");
-  document.getElementById("cakeHint").innerText = "🎉 YAY! Your wish is locked in & your letter is unlocked!";
+  document.getElementById("cakeHint").innerText = "🎉 YAY! Your wish is locked in & Barbaad is playing!";
   document.getElementById("lockBanner").style.display = "none";
   document.getElementById("letterContent").style.display = "block";
-  playBirthdayTune();
+
+  document.getElementById("songContainer").innerHTML =
+    '<iframe width="100%" height="80" style="border-radius:10px;" ' +
+    'src="https://youtube.com" ' +
+    'title="Barbaad Song" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>';
+
   launchConfetti();
 }
 
@@ -196,13 +211,6 @@ function playTone(freq, dur) {
     osc.start();
     osc.stop(ctx.currentTime + dur);
   } catch (e) {}
-}
-
-function playBirthdayTune() {
-  const notes = Array.of(261.63, 261.63, 293.66, 261.63, 349.23, 329.63);
-  notes.forEach(function(f, idx) {
-    setTimeout(function() { playTone(f, 0.35); }, idx * 320);
-  });
 }
 
 function launchConfetti() {
